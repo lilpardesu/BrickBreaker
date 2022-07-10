@@ -1,6 +1,6 @@
 package Classes;
 
-
+import java.awt.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyListener;
@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
+
 import javax.swing.Timer;
 
 public class GamePlay extends JPanel implements KeyListener, AncestorListener, ActionListener{
@@ -23,8 +24,12 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
     private int BallPosY = 350;
     private int BalldirX = -2;
     private int BalldirY = -3;
-    
+
+    private MapGenerator map;
+
     public GamePlay() {
+
+        map = new MapGenerator(3, 7);
 
         setSize(700, 600);
         addKeyListener((KeyListener) this);
@@ -43,6 +48,9 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
         g.setColor(Color.black);
         g.fillRect(1, 1, 692, 592);
 
+        //map
+        map.draw((Graphics2D)g);
+
         //boarders
         g.setColor(Color.yellow);
         g.fillRect(0, 0, 3, 592);
@@ -50,11 +58,11 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
         g.fillRect(680, 0, 3, 592);
 
         //paddle
-        g.setColor(Color.blue);
+        g.setColor(Color.cyan);
         g.fillRect(PlayerPosX, 550, 100, 8);
 
         //ball
-        g.setColor(Color.green);
+        g.setColor(Color.yellow);
         g.fillOval(BallPosX, BallPosY, 20, 20);
 
         g.dispose();
@@ -134,7 +142,9 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
         if (BallPosX > 665){
             BalldirX = -BalldirX;
         }
-        
+        if (new Rectangle(BallPosX, BallPosY, 20, 20).intersects(new Rectangle(PlayerPosX,550,100,8))){
+            BalldirY = -BalldirY;
+        }
         repaint();
         requestFocus();
     }
