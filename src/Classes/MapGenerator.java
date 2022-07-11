@@ -19,10 +19,7 @@ public class MapGenerator {
         brickHieght = 150 / row;
     }
 
-    /**
-     * @param g
-     * @param ballRectangle
-     */
+
     public void draw(Graphics2D g, Rectangle ballRectangle) {
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
