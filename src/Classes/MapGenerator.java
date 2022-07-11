@@ -1,6 +1,6 @@
 package Classes;
 
-import java.awt.*;;
+import java.awt.*;
 
 public class MapGenerator {
     public int map[][];

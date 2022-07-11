@@ -20,7 +20,4 @@ public class Main {
         
     }
 
-    private static void extracted(JFrame frame) {
-        frame.setLocationRelativeTo(null);
-    }
 }

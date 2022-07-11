@@ -146,7 +146,7 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
             BalldirY = -BalldirY;
         }
 
-        for (int i = 0; i < map.map.length; i++){
+        outerloop: for (int i = 0; i < map.map.length; i++){
             for (int j = 0; j < map.map[0].length; j++){
                 if (map.map[i][j] > 0){
                     int brickX = map.brickWidth * j + 80;
@@ -158,7 +158,7 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
                     Rectangle brickRectangle = new Rectangle(brickX, brickY, brickWidth, brickHieght);
                     Rectangle ballRectangle = new Rectangle(BallPosX, BallPosY, 20, 20);
                     
-                    outerloop: if (ballRectangle.intersects(brickRectangle)){
+                    if (ballRectangle.intersects(brickRectangle)){
                         map.setBrickValue(0, i, j);
 
                         totalbricks = totalbricks - 1;
