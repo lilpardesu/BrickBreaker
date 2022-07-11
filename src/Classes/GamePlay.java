@@ -15,6 +15,8 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.Timer;
 
 public class GamePlay extends JPanel implements KeyListener, AncestorListener, ActionListener {
+    
+    private boolean play = false;
     private int score = 0;
     private int totalbricks = 21;
     private Timer timer;
@@ -72,7 +74,32 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
         g.setFont(new FontUIResource("impact", FontUIResource.BOLD, 25));
         g.drawString("SCORE: " + score, 80, 35);
 
-        g.dispose();
+        // Game Over
+        if(BallPosY > 570){
+            play = false;
+            BalldirX = 0;
+            BalldirY = 0;
+            g.setColor(Color.RED);
+            g.setFont(new FontUIResource("impact", FontUIResource.BOLD,40));
+            g.drawString("GAME OVER", 250, 250);
+
+            g.setColor(Color.RED);
+            g.setFont(new FontUIResource("impact", FontUIResource.BOLD,20));
+            g.drawString("press enter to restart", 252, 290);
+        }
+
+        // Win
+        if(score > 20){
+            play = false;
+            BalldirX = 0;
+            BalldirY = 0;
+            g.setColor(Color.yellow);
+            g.setFont(new FontUIResource("impact", FontUIResource.BOLD,40));
+            g.drawString("YOU WON", 260, 250);
+        }
+
+        
+        g.dispose(); 
     }
 
     @Override
@@ -114,18 +141,33 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
                 PlayerPosX = 5;
             } else {
                 MoveLeft();
-                System.out.println("keypress is working");
+            }
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            if(!play) {
+                BallPosX = 120;
+                BallPosY = 350;
+                BalldirX = -2;
+                BalldirY = -3;
+                play = true;
+                PlayerPosX = 310;
+                score = 0;
+                totalbricks = 21;
+                map = new MapGenerator(3, 7);
+                repaint();
             }
         }
     }
 
     public void MoveLeft() {
         PlayerPosX = PlayerPosX - 20;
-        System.out.println("move left is working");
+        play = true;
     }
 
     public void MoveRight() {
         PlayerPosX = PlayerPosX + 20;
+        play = true;
     }
 
     @Override
@@ -137,9 +179,10 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
     @Override
     public void actionPerformed(ActionEvent e) {
         // moves the ball
-        System.out.println("game is running");
-        BallPosX = BallPosX + BalldirX;
-        BallPosY = BallPosY + BalldirY;
+        if (play) {
+            BallPosX = BallPosX + BalldirX;
+            BallPosY = BallPosY + BalldirY;
+        }
 
         // keeps the ball in the jframe
         if (BallPosX < 0) {
