@@ -1,9 +1,9 @@
 package Classes;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Graphics2D;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.Timer;
 
 public class GamePlay extends JPanel implements KeyListener, AncestorListener, ActionListener{
@@ -64,6 +65,11 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
         //ball
         g.setColor(Color.yellow);
         g.fillOval(BallPosX, BallPosY, 20, 20);
+
+        //score
+        g.setColor(Color.white);
+        g.setFont(new FontUIResource("impact", FontUIResource.BOLD, 25));
+        g.drawString("SCORE: " + score, 80, 35);
 
         g.dispose();
     }
@@ -152,10 +158,7 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
                     int brickX = map.brickWidth * j + 80;
                     int brickY = map.brickHieght * i + 50;
 
-                    int brickWidth = map.brickWidth;
-                    int brickHieght = map.brickWidth;
-
-                    Rectangle brickRectangle = new Rectangle(brickX, brickY, brickWidth, brickHieght);
+                    Rectangle brickRectangle = new Rectangle(brickX, brickY, map.brickWidth, map.brickHieght);
                     Rectangle ballRectangle = new Rectangle(BallPosX, BallPosY, 20, 20);
                     
                     if (ballRectangle.intersects(brickRectangle)){
@@ -164,7 +167,7 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
                         totalbricks = totalbricks - 1;
                         score = score + 1;
 
-                        if(BallPosX + 20 < brickRectangle.x || BallPosX > brickRectangle.x + brickRectangle.width){
+                        if(BallPosX + 19 <= brickRectangle.x || BallPosX + 1 >= brickRectangle.x + map.brickWidth){
                             BalldirX = -BalldirX;
                         }
                         else{
@@ -174,6 +177,7 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
                         break outerloop;
                     }
                 }
+                
             }
         }
         repaint();
