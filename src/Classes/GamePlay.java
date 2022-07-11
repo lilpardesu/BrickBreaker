@@ -87,6 +87,7 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
             g.setColor(Color.RED);
             g.setFont(new FontUIResource("impact", FontUIResource.BOLD,20));
             g.drawString("press enter to restart", 252, 290);
+            
         }
 
         // Win
@@ -97,6 +98,10 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
             g.setColor(Color.yellow);
             g.setFont(new FontUIResource("impact", FontUIResource.BOLD,40));
             g.drawString("YOU WON", 260, 250);
+
+            g.setColor(Color.yellow);
+            g.setFont(new FontUIResource("impact", FontUIResource.BOLD,20));
+            g.drawString("press enter to restart", 248, 290);
         }
 
         
@@ -219,17 +224,13 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
                         // Checks if the ball touches the top or bottom of the brick
                         if (BallPosY + 21 >= brickRectangle.getY() && BallPosY - 1 <= brickRectangle.getY() + map.brickHieght) {
                             BalldirY = -BalldirY;
-                        } else {
-                            BalldirX = -BalldirX;
-                        }
+                        } 
 
                         // Check if the ball touches the left or right of the brick
                         if (BallPosX + 21 >= brickRectangle.getX() && BallPosX + 21 <= brickRectangle.getX() + map.brickWidth) {
                             BalldirX = -BalldirX;
-                        } else {
-                            BalldirY = -BalldirY;
-                        }
-
+                        } 
+                       
                         
                     }
                 }
