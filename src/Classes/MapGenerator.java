@@ -1,7 +1,7 @@
 package Classes;
 
 import java.awt.*;
-
+//Farbod
 public class MapGenerator {
     public int map[][];
     public int brickWidth;

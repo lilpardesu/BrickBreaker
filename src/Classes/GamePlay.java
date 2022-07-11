@@ -18,7 +18,6 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
     
     private boolean play = false;
     private int score = 0;
-    private int totalbricks = 21;
     private Timer timer;
 
     private int PlayerPosX = 310;
@@ -43,7 +42,9 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
         timer = new Timer(10, this);
         timer.start();
     }
+//Farbod
 
+//Ali
     public void paint(Graphics g) {
 
         super.paint(g);
@@ -101,7 +102,7 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
         
         g.dispose(); 
     }
-
+//Ali
     @Override
     public void ancestorAdded(AncestorEvent event) {
         // TODO Auto-generated method stub
@@ -125,7 +126,7 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
         // TODO Auto-generated method stub
 
     }
-
+//Kimia
     @Override
     public void keyPressed(java.awt.event.KeyEvent e) {
 
@@ -153,7 +154,6 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
                 play = true;
                 PlayerPosX = 310;
                 score = 0;
-                totalbricks = 21;
                 map = new MapGenerator(3, 7);
                 repaint();
             }
@@ -169,13 +169,13 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
         PlayerPosX = PlayerPosX + 20;
         play = true;
     }
-
+//Kimia
     @Override
     public void keyReleased(java.awt.event.KeyEvent e) {
         // TODO Auto-generated method stub
 
     }
-
+//Anahita
     @Override
     public void actionPerformed(ActionEvent e) {
         // moves the ball
@@ -184,7 +184,7 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
             BallPosY = BallPosY + BalldirY;
         }
 
-        // keeps the ball in the jframe
+        // keeps the ball in the window
         if (BallPosX < 0) {
             BalldirX = -BalldirX;
         }
@@ -201,7 +201,7 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
         }
 
         // draws rectangles around bricks
-        outerloop: for (int i = 0; i < map.map.length; i++) {
+        for (int i = 0; i < map.map.length; i++) {
             for (int j = 0; j < map.map[0].length; j++) {
                 if (map.map[i][j] > 0) {
                     int brickX = map.brickWidth * j + 80;
@@ -214,10 +214,9 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
                     if (this.ballRectangle.intersects(brickRectangle)) {
                         map.setBrickValue(0, i, j);
 
-                        totalbricks = totalbricks - 1;
                         score = score + 1;
 
-                        // Check if the ball touches the top or bottom of the brick
+                        // Checks if the ball touches the top or bottom of the brick
                         if (BallPosY + 21 >= brickRectangle.getY() && BallPosY - 1 <= brickRectangle.getY() + map.brickHieght) {
                             BalldirY = -BalldirY;
                         } else {
@@ -231,7 +230,7 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
                             BalldirY = -BalldirY;
                         }
 
-                        break outerloop;
+                        
                     }
                 }
 
@@ -241,3 +240,4 @@ public class GamePlay extends JPanel implements KeyListener, AncestorListener, A
         requestFocus();
     }
 }
+//Anahita
